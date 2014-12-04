@@ -7,12 +7,12 @@ clc
 clear all
 close all
 % include custom libraries
-addpath ~/Documents/Orbits/include/orbiteq
+addpath ../include/orbiteq
 
 % Load constants from table
-load ~/Documents/Orbits/Constants/earth.mat
-load ~/Documents/Orbits/Constants/sun.mat
-load ~/Documents/Orbits/Constants/jupiter.mat
+load ../Constants/earth.mat
+load ../Constants/sun.mat
+load ../Constants/jupiter.mat
 
 
 AU = 1.496e8;
@@ -146,23 +146,23 @@ hold on
 title('Part 1')
 xlabel('true anomaly (deg)');
 ylabel('distance (km)');
-plot(nu_, ra_vec, "*b;aphelion;");
-plot(nu_, rp_vec, "*r;perihelion;");
+plot(nu_, ra_vec, ':b*');
+plot(nu_, rp_vec, ':r*');
 
 figure 2
 hold on
 title('Part 2')
 xlabel('true anomaly (deg)');
 ylabel('distance (km)');
-plot(nu_(nu_jup_s:nu_jup_f), ra_jup, "*g;aphelion after jupiter;")
+plot(nu_(nu_jup_s:nu_jup_f), ra_jup, ':go')
 
 figure 3
 hold on
 title('Part 2')
 xlabel('true anomaly (deg)');
 ylabel('distance (km)');
-plot(nu_(nu_esc_s:nu_esc_f), gone, "or;escaped;")
+plot(nu_(nu_esc_s:nu_esc_f), gone, ':r*')
 
 
 % remove paths
-rmpath ~/Documents/Orbits/include/orbiteq
+rmpath ../include/orbiteq
