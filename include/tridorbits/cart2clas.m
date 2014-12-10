@@ -1,9 +1,13 @@
-function [a,e,i,RAAN,arg_periap,M] = cart2clas(cartvec,mu)
+% bool quad_check: =0         -> departing
+%			   	   =1 or null -> approaching
+
+function [a,e,i,RAAN,arg_periap,E] = cart2clas(cartvec,mu,quad_check)
+	quad_check = 1;
 	r_vec = cartvec(1:3);
 	v_vec = cartvec(4:6);
 	r = norm(r_vec,2);
 	v = norm(v_vec,2);
-	
+
 	a = -mu/2*(v^2/2 - mu/r)^-1;
 	h_vec = cross(r_vec,v_vec);
 	h = norm(h_vec);
@@ -21,6 +25,7 @@ function [a,e,i,RAAN,arg_periap,M] = cart2clas(cartvec,mu)
 	arg_periap = acos(dot(a_hat,e_vec)/e);
 
 	E = acos((1 - r/a)/e);
-	% need to implement quad check to determine if body is approaching or leaving
-	M = E = e*cos(E);
+	if(quad_check)
+			E = -E;
+	end
 end
